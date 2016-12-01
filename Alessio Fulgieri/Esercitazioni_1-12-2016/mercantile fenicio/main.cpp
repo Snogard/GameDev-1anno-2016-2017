@@ -1,15 +1,18 @@
 #include <vector>
 #include <string>
 #include <algorithm>
-#include <time.h>
 #include <iostream>
 #include <stdlib.h>
+#include <time.h>
+
+using namespace std;
 
 void putBaseGoods(vector<string> &);
 bool swapFor(vector<string> &,string ,string );
 bool compareString(string ,string );
 void sellAll(vector<string> &);
 template<typename T> void printVector(const vector<T> &);
+void pauseAndClear();
 
 int main()
 {
@@ -45,7 +48,7 @@ int main()
     printVector(hold);
     pauseAndClear();
 
-    shuffle(hold.begin(),hold.end(),rand());
+    random_shuffle(hold.begin(),hold.end());
     printVector(hold);
     pauseAndClear();
 
@@ -66,7 +69,7 @@ void pauseAndClear()
 
 template<typename T> void printVector(const vector<T> &vect)
 {
-    for(int i=0;i<vect.size();i++)
+    for(unsigned int i=0;i<vect.size();i++)
     {
         cout<<vect[i]<<endl;
     }
@@ -79,7 +82,7 @@ void sellAll(vector<string> &hold)
 
 bool compareString(string first,string second)
 {
-    return string.compare(second)==-1;
+    return (first.compare(second)<0);
 }
 
 bool swapFor(vector<string> &hold,string toGive,string toRecive)
