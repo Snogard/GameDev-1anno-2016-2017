@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1480592366 source:c:\users\softdev1\desktop\gamedev1\2016-2017\alessio fulgieri\gamedev-1anno-2016-2017\alessio fulgieri\esercitazioni_1-12-2016\dungeon\main.cpp
+	<vector>
+	<string>
+	<algorithm>
+	<iostream>
+	<stdlib.h>
+	<time.h>
+
