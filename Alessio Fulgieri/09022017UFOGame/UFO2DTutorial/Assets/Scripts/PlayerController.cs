@@ -38,15 +38,22 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("PickUp"))
+        Debug.Log(other.tag);
+        switch (other.tag)
         {
-            other.gameObject.SetActive(false);
-            addPoints(1);
+            case "PickUp":
+                other.gameObject.SetActive(false);
+                addPoints(1);
 
-            if(isWinning())
-            {
+                if(isWinning())
+                {
+                    lblYouWin.gameObject.SetActive(true);
+                }
+                break;
+            case "Enemy":
+                lblYouWin.text = "You Lose";
                 lblYouWin.gameObject.SetActive(true);
-            }
+                break;
         }
     }
 
