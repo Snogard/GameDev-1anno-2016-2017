@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//http://catlikecoding.com/unity/tutorials/curves-and-splines/
 public class RotatorAround : MonoBehaviour {
     [SerializeField]
     GameObject center;
