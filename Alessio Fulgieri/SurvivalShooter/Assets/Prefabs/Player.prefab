@@ -55,6 +55,7 @@ GameObject:
   - component: {fileID: 82560930305322192}
   - component: {fileID: 136535806063525848}
   - component: {fileID: 114245764186904946}
+  - component: {fileID: 114599735515003348}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -260,6 +261,24 @@ MonoBehaviour:
   floorMask:
     serializedVersion: 2
     m_Bits: 256
+--- !u!114 &114599735515003348
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1601678643527252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 544f2064df03e95419b4a5147c506b08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingHealth: 100
+  currentHealth: 0
+  healthSlider: {fileID: 0}
+  damageImage: {fileID: 0}
+  deathClip: {fileID: 8300000, guid: d36a393bca4582043982db9089e1694f, type: 3}
+  flashSpeed: 5
+  flashColour: {r: 1, g: 0, b: 0, a: 0.1}
 --- !u!136 &136535806063525848
 CapsuleCollider:
   m_ObjectHideFlags: 1
