@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+[RequireComponent(typeof(EnemyHealth))]
+[RequireComponent(typeof(UnityEngine.AI.NavMeshAgent))]
 public class EnemyMovement : MonoBehaviour
 {
     Transform player;

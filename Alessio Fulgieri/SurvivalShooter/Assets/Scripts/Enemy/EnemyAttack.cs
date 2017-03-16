@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(EnemyHealth))]
 public class EnemyAttack : MonoBehaviour
 {
     public float timeBetweenAttacks = 0.5f;

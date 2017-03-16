@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
-
+[RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(CapsuleCollider))]
+[RequireComponent(typeof(Animator))]
 public class EnemyHealth : MonoBehaviour
 {
     public int startingHealth = 100;

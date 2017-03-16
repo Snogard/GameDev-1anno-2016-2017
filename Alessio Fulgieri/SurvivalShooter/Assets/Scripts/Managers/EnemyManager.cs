@@ -18,6 +18,7 @@ public class EnemyManager : MonoBehaviour
     {
         if(playerHealth.currentHealth <= 0f)
         {
+            CancelInvoke("Spawn");
             return;
         }
 
