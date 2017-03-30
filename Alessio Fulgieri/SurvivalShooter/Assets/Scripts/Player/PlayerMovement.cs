@@ -11,10 +11,14 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody _rg;
     private float _camRayLength = 100.0f;
 
+    public float sensitivityX = 5f;
+
     void Awake()
     {
         _anim = GetComponent<Animator>();
         _rg = GetComponent<Rigidbody>();
+
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void FixedUpdate()
@@ -29,25 +33,21 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move(float h, float v)
     {
-        Vector3 movement = new Vector3(h, 0.0f, v);
-        movement = movement.normalized * speed * Time.deltaTime;
-        _rg.MovePosition(transform.position + movement);
+
+        Vector3 moveDirection;
+        moveDirection = new Vector3(speed * h, 0, speed * v);
+        moveDirection = transform.TransformDirection(moveDirection) * Time.fixedDeltaTime;
+        _rg.MovePosition(transform.position + moveDirection);
+
+
     }
 
     private void Rotate()
     {
-        Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        RaycastHit floorHit;
 
-        if (Physics.Raycast(camRay, out floorHit, _camRayLength, floorMask))
-        {
-            Vector3 playerToMouse = floorHit.point - transform.position;
-            //playerToMouse.y = 0f;
+        transform.Rotate(0, Input.GetAxis("Mouse X") * sensitivityX, 0);
 
-            Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
-            _rg.MoveRotation(newRotation);
-        }
     }
 
     private void Animating(float h, float v)
