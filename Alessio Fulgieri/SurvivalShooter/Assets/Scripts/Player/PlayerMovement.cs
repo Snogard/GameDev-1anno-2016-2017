@@ -34,17 +34,14 @@ public class PlayerMovement : MonoBehaviour
     private void Move(float h, float v)
     {
 
-        Vector3 moveDirection;
-        moveDirection = new Vector3(speed * h, 0, speed * v);
+        Vector3 moveDirection = new Vector3(speed * h, 0, speed * v);
         moveDirection = transform.TransformDirection(moveDirection) * Time.fixedDeltaTime;
         _rg.MovePosition(transform.position + moveDirection);
-
 
     }
 
     private void Rotate()
     {
-
 
         transform.Rotate(0, Input.GetAxis("Mouse X") * sensitivityX, 0);
 
