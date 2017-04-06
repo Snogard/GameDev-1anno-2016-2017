@@ -46,7 +46,7 @@ public class BoardManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        GenerateMap(1);
     }
 
     // Update is called once per frame
@@ -56,7 +56,7 @@ public class BoardManager : MonoBehaviour
     }
     #endregion
 
-
+    
     void InitializeGridPosition()
     {
         _gridPositions.Clear();
@@ -72,13 +72,14 @@ public class BoardManager : MonoBehaviour
     void BoardSetup()
     {
         _boardHolder = new GameObject("Board").transform;
+        _boardHolder.position = transform.position;
         for (int x = -1; x < columns+1; x++)
         {
             for (int y = -1; y < rows+1; y++)
             {
                 GameObject toInstantiate;
 
-                if (x == -1 || x == columns+1 || y == -1 || y == rows+1)
+                if (x == -1 || x == columns || y == -1 || y == rows)
                 {
                     toInstantiate = outerWallTiles[Random.Range(0, outerWallTiles.Length)];
                 }
