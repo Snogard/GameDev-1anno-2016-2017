@@ -28,7 +28,7 @@ public class ExplodeOnContact : MonoBehaviour {
             EnemyHealth health = hittenObjects[i].GetComponent<EnemyHealth>();
             if (health != null)
             {
-                health.TakeDamage(damage, Vector3.zero+health.transform.position);
+                health.TakeDamage((int)damage, Vector3.zero+health.transform.position);
             }
         }
         
