@@ -22,16 +22,20 @@ public class StateController : MonoBehaviour
     private GameObject _player;
 
     [SerializeField]
-    private GameObject _wayPoint;
+    private GameObject[] _wayPoints;
 
     private IState _currentState;
     private AICharacterControl _characterControl;
+    [SerializeField]
+    private int _currentWaypoint;
 
     private void Awake()
     {
         _currentState = new PatroState();
+        
         _characterControl = GetComponent<AICharacterControl>();
-
+        _currentWaypoint = 0;
+        _characterControl.SetTarget(_wayPoints[0].transform);
     }
 
     private void Update()
@@ -68,10 +72,16 @@ public class StateController : MonoBehaviour
                     _characterControl.SetTarget(_player.transform);
                     break;
                 case ETargetType.WAYPOINT:
-                    _characterControl.SetTarget(_wayPoint.transform);
+                    _currentWaypoint=(_currentWaypoint+1)%_wayPoints.Length;
+                    _characterControl.SetTarget(_wayPoints[_currentWaypoint].transform);
                     break;
             }
 
         }
     }
+    public Transform GetCurrentWayPoint()
+    {
+        return _wayPoints[_currentWaypoint].transform;
+    }
+   
 }

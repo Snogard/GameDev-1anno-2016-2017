@@ -26,6 +26,9 @@ public class PatroState : IState
 
     public void UpdateState(StateController controller)
     {
-        controller.SetTarget(StateController.ETargetType.WAYPOINT);
+        if (Vector3.Distance( controller.transform.position, controller.GetCurrentWayPoint().position)<1f)
+        {
+            controller.SetTarget(StateController.ETargetType.WAYPOINT);
+        }
     }
 }
