@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
 
     BoardManager _boardManger;
-    [SerializeField]
+    [SerializeField][ReadOnly]
     int _level = 1;
 
     void Awake()
