@@ -6,7 +6,7 @@ using Random = UnityEngine.Random; //disambiguazione
 
 public class BoardManager : MonoBehaviour
 {
-    [SerializeField]
+    [Serializable]
     public class Count
     {
         public int minimum;
@@ -19,20 +19,34 @@ public class BoardManager : MonoBehaviour
         }
     }
 
-    public int columns = 8;
-    public int rows = 8;
+    [Header("Dimensions")]
+    [SerializeField]
+    int columns = 8;
 
-    public Count wallCount = new Count(5, 9);
-    public Count foodCount = new Count(1, 5);   
+    [SerializeField]
+    int rows = 8;
+
+    [Header("Walls & Food")]
+    [SerializeField]
+    Count wallCount = new Count(5, 9);
+
+    [SerializeField]
+    Count foodCount = new Count(1, 5);
 
     #region Tiles
     [Header("Tiles")]
-    public GameObject exit;
-    public GameObject[] floorTiles;
-    public GameObject[] wallTiles;
-    public GameObject[] enemysTiles;
-    public GameObject[] outerWallTiles;
-    public GameObject[] foodTiles;
+    [SerializeField]
+    GameObject exit;
+    [SerializeField]
+    GameObject[] floorTiles;
+    [SerializeField]
+    GameObject[] wallTiles;
+    [SerializeField]
+    GameObject[] enemysTiles;
+    [SerializeField]
+    GameObject[] outerWallTiles;
+    [SerializeField]
+    GameObject[] foodTiles;
     #endregion
 
 
@@ -44,11 +58,6 @@ public class BoardManager : MonoBehaviour
 
     #region MonoImplementation
     // Use this for initialization
-    void Start()
-    {
-        GenerateMap(1);
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -56,7 +65,7 @@ public class BoardManager : MonoBehaviour
     }
     #endregion
 
-    
+
     void InitializeGridPosition()
     {
         _gridPositions.Clear();
@@ -73,9 +82,9 @@ public class BoardManager : MonoBehaviour
     {
         _boardHolder = new GameObject("Board").transform;
         _boardHolder.position = transform.position;
-        for (int x = -1; x < columns+1; x++)
+        for (int x = -1; x < columns + 1; x++)
         {
-            for (int y = -1; y < rows+1; y++)
+            for (int y = -1; y < rows + 1; y++)
             {
                 GameObject toInstantiate;
 
@@ -88,8 +97,8 @@ public class BoardManager : MonoBehaviour
                     toInstantiate = floorTiles[Random.Range(0, floorTiles.Length)];
                 }
 
-                Instantiate(toInstantiate, new Vector3(x,y,0f), Quaternion.identity, _boardHolder);
-                
+                Instantiate(toInstantiate, new Vector3(x, y, 0f), Quaternion.identity, _boardHolder);
+
             }
         }
     }
@@ -108,7 +117,7 @@ public class BoardManager : MonoBehaviour
         {
             Vector3 randomPosition = RandomPosition();
             GameObject tileChoice = tileArray[Random.Range(0, tileArray.Length)];
-            Instantiate(tileChoice, randomPosition, Quaternion.identity);
+            Instantiate(tileChoice, randomPosition, Quaternion.identity,_boardHolder);
         }
     }
     public void GenerateMap(int level)
@@ -118,9 +127,9 @@ public class BoardManager : MonoBehaviour
         LayoutObjectAtRandom(wallTiles, wallCount.minimum, wallCount.maximum);
         LayoutObjectAtRandom(foodTiles, foodCount.minimum, foodCount.maximum);
 
-        int enemyCount =(int) Mathf.Log(level, 2f);
+        int enemyCount = (int)Mathf.Log(level, 2f);
         LayoutObjectAtRandom(enemysTiles, enemyCount, enemyCount);
 
-        Instantiate(exit, new Vector3(columns - 1, rows - 1, 0f),Quaternion.identity);
+        Instantiate(exit, new Vector3(columns - 1, rows - 1, 0f), Quaternion.identity,_boardHolder);
     }
 }
