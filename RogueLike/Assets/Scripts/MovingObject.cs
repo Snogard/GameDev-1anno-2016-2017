@@ -28,18 +28,18 @@ public abstract class MovingObject : MonoBehaviour
 
     protected IEnumerator SmoothMovement(Vector3 end)
     {
-        float sqrRemaibubgDistance = (transform.position - end).sqrMagnitude;
-        while (sqrRemaibubgDistance > float.Epsilon)
+        float sqr = (transform.position - end).sqrMagnitude;
+        while (sqr > float.Epsilon)
         {
 
             Vector3 newPosition = Vector3.MoveTowards(_rigidBody.position, end, _inverseMoveTime * Time.deltaTime);
             _rigidBody.MovePosition(newPosition);
-            sqrRemaibubgDistance = (transform.position - end).sqrMagnitude;
+            sqr = (transform.position - end).sqrMagnitude;
 
             yield return null; //dice di stopparsi a questo frame
         }
 
-
+        Debug.Log("fine movimento");
     }
 
     protected abstract void OnCantMove<T>(T component) where T : Component;
@@ -68,9 +68,11 @@ public abstract class MovingObject : MonoBehaviour
     {
         RaycastHit2D hit;
         bool isMoving = Move(xDir, yDir,out hit);
+        //Debug.Log( hit.collider.name+" Block");
         if (isMoving)
         {
             OnMove();
+            Debug.Log(this.gameObject.name+" moving");
         }
         else
         {
