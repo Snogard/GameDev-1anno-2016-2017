@@ -176,6 +176,18 @@ namespace Completed
 			//Enemies are done moving, set enemiesMoving to false.
 			enemiesMoving = false;
 		}
-	}
+        public void Win()
+        {
+            //Set levelText to display number of levels passed and game over message
+            levelText.text = "After " + level + " days, you won.";
+
+            //Enable black background image gameObject.
+            levelImage.SetActive(true);
+
+            //Disable this GameManager.
+            enabled = false;
+        }
+    }
+    
 }
 

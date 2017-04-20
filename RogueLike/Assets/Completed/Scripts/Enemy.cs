@@ -102,8 +102,13 @@ namespace Completed
             health -= damage;
             if (health <= 0)
             {
+                if(gameObject.CompareTag("Boss"))
+                {
+                    GameManager.instance.Win();
+                }
                 gameObject.SetActive(false);
             }
+
         
         }
     }
