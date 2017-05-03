@@ -1,8 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public interface ICommand
+namespace CommandPattern
 {
-    void Execute();
+    public interface ICommand
+    {
+        void Execute(Transform tranfsorm, ICommand command);
+        void Move(Transform tranf);
+        void Undo(Transform tranf);
+    }
 }
