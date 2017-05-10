@@ -6,27 +6,22 @@ namespace SpatialPartition
 {
     public abstract class Soldier
     {
-        public MeshRenderer soldierMeshRederer;
+        
         protected float mapWidth;
-        protected GameObject soldierObj;
 
 
+        public MeshRenderer soldierMeshRederer;
+        public Transform soldierTranform;
 
-        // Use this for initialization
-        void Start()
-        {
+        public Soldier previusSoldier;
+        public Soldier nextSoldier;
 
-        }
+        protected float walkSpeed;
 
-        // Update is called once per frame
-        void Update()
-        {
 
-        }
+        public virtual void Move() { }
 
-        public abstract void Move();
-
-        public abstract void Move(Soldier closestEnemy);
+        public virtual void Move(Soldier soldier) { }
         
     }
 }

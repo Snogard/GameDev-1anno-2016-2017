@@ -27,7 +27,17 @@ namespace SpatialPartition
 
         }
 
+        internal void Add(Soldier soldier)
+        {
+            throw new NotImplementedException();
+        }
+
         internal Soldier FindClosestEnemy(Soldier soldier)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void Move(Enemy enemy, Vector3 oldPos)
         {
             throw new NotImplementedException();
         }

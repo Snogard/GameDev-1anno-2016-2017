@@ -10,18 +10,15 @@ namespace SpatialPartition
 
         public Friendly(GameObject newFriendly, float mapWidth)
         {
-            this.soldierObj = newFriendly;
+            this.soldierTranform = newFriendly.transform;
             this.mapWidth = mapWidth;
+            this.walkSpeed = 2f;
         }
 
-        public override void Move()
+        public override void Move(Soldier soldier)
         {
-            throw new NotImplementedException();
-        }
-
-        public override void Move(Soldier closestEnemy)
-        {
-            throw new NotImplementedException();
+            soldierTranform.rotation = Quaternion.LookRotation(soldier.soldierTranform.position - soldierTranform.position);
+            soldierTranform.Translate(Vector3.forward * Time.deltaTime * walkSpeed);
         }
     }
 }
