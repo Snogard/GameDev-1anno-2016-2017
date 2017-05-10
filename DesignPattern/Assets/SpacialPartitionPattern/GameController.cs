@@ -55,7 +55,28 @@ namespace SpatialPartition
         // Update is called once per frame
         void Update()
         {
+            for (int i = 0; i < enemySoldiers.Count; i++)
+            {
+                enemySoldiers[i].Move();
+            }
 
+            for (int i = 0; i < closestEnemies.Count; i++)
+            {
+                closestEnemies[i].soldierMeshRederer.material = enemyMaterial;
+            }
+
+            closestEnemies.Clear();
+
+            for (int i = 0; i < friendlySoldiers.Count; i++)
+            {
+                Soldier closestEnemy = grid.FindClosestEnemy(friendlySoldiers[i]);
+                if(closestEnemy!=null)
+                {
+                    closestEnemy.soldierMeshRederer.material = closestEnemyMaterial;
+                    closestEnemies.Add(closestEnemy);
+                    friendlySoldiers[i].Move(closestEnemy);
+                }
+            }
         }
     }
 }

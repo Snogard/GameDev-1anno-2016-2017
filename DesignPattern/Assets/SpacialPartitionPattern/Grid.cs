@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 namespace SpatialPartition
@@ -24,6 +25,11 @@ namespace SpatialPartition
         void Update()
         {
 
+        }
+
+        internal Soldier FindClosestEnemy(Soldier soldier)
+        {
+            throw new NotImplementedException();
         }
     }
 }
