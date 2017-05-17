@@ -9,10 +9,11 @@ namespace SpatialPartition
         
         protected float mapWidth;
 
-
         public MeshRenderer soldierMeshRederer;
+
         public Transform soldierTranform;
 
+        //soldati
         public Soldier previusSoldier;
         public Soldier nextSoldier;
 
