@@ -17,7 +17,9 @@ namespace SpatialPartition
 
         public override void Move(Soldier soldier)
         {
+            //ruota verso il nemico
             soldierTranform.rotation = Quaternion.LookRotation(soldier.soldierTranform.position - soldierTranform.position);
+            //si muove verso il nemico
             soldierTranform.Translate(Vector3.forward * Time.deltaTime * walkSpeed);
         }
     }

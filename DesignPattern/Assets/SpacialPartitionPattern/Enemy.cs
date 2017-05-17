@@ -17,6 +17,7 @@ namespace SpatialPartition
             this.soldierMeshRederer = newEnemy.GetComponent<MeshRenderer>();
             this.mapWidth = mapWidth;
             this.grid = grid;
+
             grid.Add(this);
             oldPos = soldierTranform.position;
             this.walkSpeed = 5f;
@@ -33,8 +34,10 @@ namespace SpatialPartition
         public override void Move()
         {
             soldierTranform.Translate(Vector3.forward * Time.deltaTime * walkSpeed);
+
             grid.Move(this, oldPos);
             oldPos = soldierTranform.position;
+
             if((soldierTranform.position-currentTarget).magnitude<1)
             {
                 GetNewTarget();

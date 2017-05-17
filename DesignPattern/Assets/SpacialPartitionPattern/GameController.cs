@@ -26,6 +26,7 @@ namespace SpatialPartition
         float mapWidth = 50f;
         int cellSize = 10;
         //numero di soldati
+        
         int numberOfSoldiers = 100;
 
         Grid grid;
