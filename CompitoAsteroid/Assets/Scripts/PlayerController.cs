@@ -44,10 +44,15 @@ namespace Asteroid
         [SerializeField]
         private float _rateOfFire;
         /// <summary>
-        /// the speed of the fired projectile
+        /// prefab of the projectile
         /// </summary>
         [SerializeField]
-        private float projectileSpeed;
+        private Projectile _projectilePrefab;
+        /// <summary>
+        /// the points where projectile spawns
+        /// </summary>
+        [SerializeField]
+        private Transform[] _firePoints;
         #endregion
 
         #region ButtonAttributes
@@ -59,6 +64,8 @@ namespace Asteroid
 
         private float _rightLeftAxisResult;
         private float _upDownAxisResult;
+
+        private const string _fireButton = "Fire1";
         #endregion
 
         /// <summary>
@@ -66,9 +73,10 @@ namespace Asteroid
         /// </summary>
         [SerializeField]
         private float _currentSpeed;
-
-
         
+
+
+
 
 
         // Use this for initialization
@@ -116,38 +124,32 @@ namespace Asteroid
             }
             else
             {
-                if(_currentSpeed>_baseSpeed)
+                if (_currentSpeed > _baseSpeed)
                 {
                     _currentSpeed -= _acceleration * Time.deltaTime;
-                    if(_currentSpeed<_baseSpeed)
+                    if (_currentSpeed < _baseSpeed)
                     {
                         _currentSpeed = _baseSpeed;
                     }
 
-                    
+
                 }
-                if (_currentSpeed <_baseSpeed)
+                if (_currentSpeed < _baseSpeed)
                 {
                     _currentSpeed += _acceleration * Time.deltaTime;
-                    if(_currentSpeed>_baseSpeed)
+                    if (_currentSpeed > _baseSpeed)
                     {
                         _currentSpeed = _baseSpeed;
                     }
                 }
 
             }
-                
-            /*
 
-            // if the user leave the buttons the current speed become basespeed
-            if (Input.GetButtonUp(_incraseSpeedButton))
+            if(Input.GetButtonDown(_fireButton))
             {
-                _currentSpeed = _baseSpeed;
+                Shoot();
+         
             }
-            else if (Input.GetButtonUp(_decraseSpeedButton))
-            {
-                _currentSpeed = _baseSpeed;
-            }*/
 
             _rightLeftAxisResult = Input.GetAxisRaw(_rightLeftAxis);
             _upDownAxisResult = Input.GetAxisRaw(_upDownAxis);
@@ -162,7 +164,14 @@ namespace Asteroid
             transform.Rotate(new Vector3(_upDownAxisResult * -1, _rightLeftAxisResult, 0) * _rotationSpeed * Time.fixedDeltaTime);
         }
 
-
+        private void Shoot()
+        {
+            for (int i = 0; i < _firePoints.Length; i++)
+            {
+                Instantiate<Projectile>(_projectilePrefab, _firePoints[i].position, transform.rotation);
+            }
+        }
+            
 
     }
 }

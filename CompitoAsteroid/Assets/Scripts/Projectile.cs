@@ -34,7 +34,7 @@ namespace Asteroid
 
         void FixedUpdate()
         {
-            transform.Translate(transform.forward * _speed * Time.fixedTime);
+            transform.Translate(transform.forward * _speed * Time.fixedDeltaTime);
         }
 
 
