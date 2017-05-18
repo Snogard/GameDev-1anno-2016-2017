@@ -39,7 +39,7 @@ namespace Asteroid
 
         [Header("Weapon")]
         /// <summary>
-        /// how much delay the player has before shooting another projectile
+        /// how much projectile the player can shoot in one second
         /// </summary>
         [SerializeField]
         private float _rateOfFire;
@@ -64,16 +64,21 @@ namespace Asteroid
 
         private float _rightLeftAxisResult;
         private float _upDownAxisResult;
-
+        /// <summary>
+        /// name of the fire button
+        /// </summary>
         private const string _fireButton = "Fire1";
         #endregion
 
         /// <summary>
         /// the current speed of the player
         /// </summary>
-        [SerializeField]
         private float _currentSpeed;
-        
+
+        /// <summary>
+        /// controlls if the olayer can shoot
+        /// </summary>
+        private bool _canShoot;
 
 
 
@@ -83,6 +88,7 @@ namespace Asteroid
         void Start()
         {
             _currentSpeed = _baseSpeed;
+            _canShoot = true;
         }
 
         // Update is called once per frame
@@ -145,10 +151,15 @@ namespace Asteroid
 
             }
 
-            if(Input.GetButtonDown(_fireButton))
+            //fire projectiles
+            if(Input.GetButton(_fireButton))
             {
-                Shoot();
-         
+                if (_canShoot)
+                {
+                    Shoot();
+                    _canShoot = false;
+                    StartCoroutine(ShootDelay(1/_rateOfFire));
+                }
             }
 
             _rightLeftAxisResult = Input.GetAxisRaw(_rightLeftAxis);
@@ -158,20 +169,36 @@ namespace Asteroid
 
         }
 
+        /// <summary>
+        /// move the player
+        /// </summary>
         void FixedUpdate()
         {
             transform.Translate(transform.forward * _currentSpeed * Time.fixedDeltaTime);
             transform.Rotate(new Vector3(_upDownAxisResult * -1, _rightLeftAxisResult, 0) * _rotationSpeed * Time.fixedDeltaTime);
         }
 
+        /// <summary>
+        /// shoot the projectile in every firepoint
+        /// </summary>
         private void Shoot()
         {
             for (int i = 0; i < _firePoints.Length; i++)
             {
-                Instantiate<Projectile>(_projectilePrefab, _firePoints[i].position, transform.rotation);
+                Projectile proj = Instantiate<Projectile>(_projectilePrefab, _firePoints[i].position, Quaternion.identity);
+                proj.GetComponent<Rigidbody>().AddForce(transform.forward * proj._speed,ForceMode.Impulse);
             }
         }
-            
+        /// <summary>
+        /// wait an ammount of time before the player can shoot again
+        /// </summary>
+        /// <param name="time">seconsd to wait</param>
+        /// <returns></returns>
+        private IEnumerator ShootDelay(float time)
+        {
+            yield return new WaitForSeconds(time);
+            _canShoot = true;
+        }
 
     }
 }
