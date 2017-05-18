@@ -93,7 +93,7 @@ namespace Asteroid
                 yield return new WaitForSeconds(_spawnDelay);
                 if (asteroidCount < _maxAsteroids)
                 {
-                    Vector3 position = new Vector3(Random.Range(_minSpawnSistance, _maxSpawnDistance), Random.Range(_minSpawnSistance, _maxSpawnDistance), Random.Range(_minSpawnSistance, _maxSpawnDistance)) + _playerTranform.position;
+                    Vector3 position = new Vector3(Random.Range(-_maxSpawnDistance, _maxSpawnDistance), Random.Range(-_maxSpawnDistance, _maxSpawnDistance) , Random.Range(-_maxSpawnDistance, _maxSpawnDistance)) + _playerTranform.position;
                     Instantiate(_asteroidPrefab, position, Quaternion.identity);
                     asteroidCount++;
                 }
