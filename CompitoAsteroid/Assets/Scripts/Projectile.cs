@@ -12,31 +12,32 @@ namespace Asteroid
         /// <summary>
         /// the speed of the fired projectile
         /// </summary>
-        [SerializeField]
-        private float _speed;
+        public float _speed;
         /// <summary>
         /// the lifetime of the projectile in seconds
         /// </summary>
         [SerializeField]
         private float _lifeTime;
 
-
-
-        void Awake()
-        {
-
-        }
-
+        /// <summary>
+        /// sets the gameobject to be destroyed in _lifeTime seconds
+        /// </summary>
         void Start()
         {
             Destroy(gameObject, _lifeTime);
         }
 
+        /// <summary>
+        /// move the gameobject
+        /// </summary>
         void FixedUpdate()
         {
-            transform.Translate(transform.forward * _speed * Time.fixedDeltaTime);
+          //  transform.Translate(transform.forward * _speed * Time.fixedDeltaTime*-1);
         }
-
+        void OnTriggerEnter(Collider other)
+        {
+            Destroy(other.gameObject);
+        }
 
     }
 }
